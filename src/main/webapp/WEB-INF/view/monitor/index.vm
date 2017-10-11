@@ -1,0 +1,183 @@
+#set($path = ${rc.contextPath})
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线实时检测</title>
+    #parse('common/path-js.vm')
+    <link href="$path/static/css/style.css" rel="stylesheet">
+    <link href="$path/static/css/font.css" rel="stylesheet">
+    <link href="$path/static/css/bootstrap.css" rel="stylesheet">
+    <link href="$path/static/css/newStyle.css" rel="stylesheet">
+    <script src="$path/static/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <script src="$path/static/js/common.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="left testLeft">
+        <p class="heading">检测画面
+            <a class="btn-search" href="javascript:tableInit();">查询</a>
+        </p>
+        <form class="control-condition">
+            <div class="form-inline">
+                <label>创建时间：</label>
+                <div class="input-group datetimepicker start_time">
+                    <input type="text" id="timeon" name="beginTime">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+                <span>至</span>
+                <div class="input-group datetimepicker end_time">
+                    <input type="text" id="timeoff" name="endTime">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </form>
+        <div class="tab">
+            <ul class="nav nav-tabs" id="leftul">
+            </ul>
+            <div class="tab-content" id="centerdiv">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //先执行一次
+    tableInit();
+
+    $(function () {
+        //刷新页面
+        setInterval(tableInit, 1000 * 60);
+    });
+
+    function tableInit() {
+        var leftul = $("#leftul");
+        //开始时间
+        var timeon = $("#timeon");
+        //结束时间
+        var timeoff = $("#timeoff");
+        //清空左侧信息
+        leftul.html('');
+        var centerdiv = $('#centerdiv');
+        //清空中间信息
+        centerdiv.html('');
+
+        $.getJSON("monitorDatas", "beginTime=" + timeon.val() + "&endTime=" + timeoff.val(), function (result) {
+            for (i = 0; i < result.length; i++) {
+                var li;
+                if (i == 0) {
+                    li = '<li class="active">';
+                } else {
+                    li = '<li>';
+                }
+                li += '<a href="#part' + result[i].deviceNum + '"data-toggle="tab"><img src="' + result[i].faults[0].imagePath + '"></a>';
+                li += '<p>' + result[i].deviceNum + '号机位</p>';
+                li += '</li>';
+                leftul.append(li);
+
+
+                var resultModel = result[i];
+                var div;
+
+                if (i == 0) {
+                    div = '<div class="tab-pane in active" id="part' + resultModel.deviceNum + '">';
+                } else {
+                    div = '<div class="tab-pane" id="part' + resultModel.deviceNum + '">';
+                }
+                div += '<ul>';
+                for (j = 0; j < resultModel.faults.length; j++) {
+                    div += '<li>';
+                    div += '<img src="' + resultModel.faults[j].imagePath + '">';
+                    //div += '<p>';
+                    //div += '<label>' + resultModel.deviceNum + '号机位' + (j + 1) + '</label>';
+                    //div += '<span>' + resultModel.faults[j].carNumber + resultModel.faults[j].bowPosition + '号受电弓' + resultModel.faults[j].createdAt + '</span>';
+                    //div += '</p>';
+
+                    div += '<div class="right testRight">';
+                    div += '<p class="heading">检测数据</p>';
+                    div += '<div class="testInfo">';
+                    div += '<p class="header">检测信息</p>';
+
+                    div += '<p class="info"><label>车号：</label>' + resultModel.faults[j].carNumber + '</p>';
+                    div += '<p class="info"><label>位置：</label>' + resultModel.deviceNum + '号机位' + (j + 1) + '</p>';
+                    div += '<p class="info"><label>弓位置：</label>' + resultModel.faults[j].bowPosition + '</p>';
+                    div += '<p class="info"><label>检测时间：</label>' + resultModel.faults[j].createdAt + '</p>';
+                    div += '</div>';
+                    div += '<div class="defectInfo">';
+                    div += '<p class="header">缺陷信息</p>';
+                    div += '<p class="info">' + resultModel.faults[j].faultInfo + '</p>';
+                    div += '</div>';
+                    div += '</div>';
+
+                    div += '</li>';
+                }
+                div += '</ul>';
+                div += '<div class="btn-container">';
+
+                div += '<a class="icon-4" href="javascript:;"></a>';
+                div += '<span>1/' + resultModel.faults.length + '</span>';
+                div += '<a class="icon-5" href="javascript:;"></a>';
+                div += '</div>';
+                div += '</div>';
+                centerdiv.append(div);
+
+                //绑定上一页下一页事件
+                preNext(resultModel);
+            }
+            //绑定查看原图的点击事件
+            seeImage();
+        });
+    }
+
+    function preNext(resultModel) {
+        $(".tab-pane[id='part" + resultModel.deviceNum + "' ] .icon-5").click(function () {
+            var target = $(this).closest(".tab-pane");
+            var lis = target.find("li");
+            var next = target.find("li:visible").next();
+            var first = target.find("li:first");
+            var text = '';
+            if (next.is("li")) {
+                text = next.index() + 1 + '/' + resultModel.faults.length;
+                lis.hide();
+                next.fadeIn();
+            } else {
+                text = first.index() + 1 + '/' + resultModel.faults.length;
+                lis.hide();
+                first.fadeIn();
+            }
+            $(this).prev().text(text);
+        })
+        $(".tab-pane[id='part" + resultModel.deviceNum + "' ] .icon-4").click(function () {
+            var target = $(this).closest(".tab-pane");
+            var lis = target.find("li");
+            var prev = target.find("li:visible").prev();
+            var last = target.find("li:last");
+            var text = '';
+            if (prev.is("li")) {
+                text = prev.index() + 1 + '/' + resultModel.faults.length;
+                lis.hide();
+                prev.fadeIn();
+            } else {
+                text = last.index() + 1 + '/' + resultModel.faults.length;
+                lis.hide();
+                last.fadeIn();
+            }
+            $(this).next().text(text);
+        })
+    }
+
+    function seeImage() {
+        //查看原图
+        $(".tab-pane li>img").click(function () {
+            var src = $(this).attr("src");
+            var str = '<div id="showOriginal">';
+            str += '<a class="icon-delete" href="javascript:;"></a>';
+            str += '<img src="' + src + '">';
+            str += '</div>';
+            $("body", parent.document).append(str);
+        })
+    }
+</script>
+</body>
+</html>

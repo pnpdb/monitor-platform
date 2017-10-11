@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6号线受电弓状态及裂纹监控平台</title>
+    #parse('common/path-css.vm')
+    <script src="$path/static/js/alert.js" type="text/javascript"></script>
+</head>
+<body style="overflow:hidden;">
+<div class="container clear">
+    <!--头部内容-->
+    <header class="clear">
+        <div class="clear left">
+            <span class="icon-logo logo-img left"></span>
+            <h3 class="main-title right">6号线受电弓状态及裂纹监控平台</h3>
+        </div>
+        <ul class="right header-r-ul">
+            <li class="left main-select">
+                <a class="userName" href="javascript:void(0);">$user.name</a>
+                <a href="javascript:void(0);" class="seat-icon icon-left-triangle"></a>
+                <div class="collapse">
+                    <a href="javascript:;" onclick="detail();">资料</a>
+                    <a href="javascript:;" onclick="editPassword();">设置</a>
+                    <a href="$path/logout">退出</a>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <!--导航链接-->
+    <nav>
+        <ul class="nav-ul clear left">
+            <li class="nav-home link selected">
+                <a href="$path/monitors" target="myiframe">在线实时监测</a>
+            </li>
+            <li class="nav-home link">
+                <a href="$path/dics" target="myiframe">缺陷库</a>
+            </li>
+            <li class="nav-home link">
+                <a href="$path/faults/index" target="myiframe">缺陷查询</a>
+            </li>
+			#if($shiro.hasPermission("系统管理"))
+            <li class="nav-administration link multi-select">
+                <a href="javascript:void(0);">系统管理</a>
+                <span class="seat-icon icon-left-triangle"></span>
+                <!--collapes-->
+                <ul class="amazed-collapse collapse">
+					#if($shiro.hasPermission("系统管理-人员管理"))
+                    <li>
+                        <a href="$path/users/person" target="myiframe">人员管理</a>
+                    </li>
+					#end
+					#if($shiro.hasPermission("系统管理-角色管理"))
+                    <li>
+                        <a href="$path/permissions/role" target="myiframe">角色管理</a>
+                    </li>
+					#end
+                </ul>
+            </li>
+            #end
+        </ul>
+        <span class="icon-calendar-alt-stroke right"></span>
+    </nav>
+    <!--主体内容-->
+    <section class="section">
+        <!--iframe-->
+        <div class="iframe-parent">
+            <iframe src="$path/monitors" frameborder="0"  id="myiframe" name="myiframe"></iframe>
+        </div>
+    </section>
+</div>
+<div id="mask"></div>
+	<!--个人资料-->
+ <div class="modal index-12" id="people-edit">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="left weight-bold blue-font">个人资料</h3>
+                <a href="javascript:void(0)" class="icon-delete right"></a>
+            </div>
+			<form id="userEditForm">
+				<input type="hidden" id="editUserId" name="userId" />
+                <div class="modal-body min-height">
+                    <div class="the-information-input the-information-list">
+                        <div class="row clear mar-top-10">
+                            <label for="login-name">登 录 名：</label>
+                            <label>$!user.loginName</label>
+                        </div>
+                        <div class="row clear mar-top-10">
+                            <label for="job-number">工  号：</label>
+                            <label>$!user.employeeCode</label>
+                        </div>
+                        <div class="row clear mar-top-10">
+                            <label for="username">姓  名：</label>
+                            <label>$!user.name</label>
+                        </div>
+                        <div class="row clear mar-top-10">
+                            <label for="gender">性  别：</label>
+                            <label>$!user.gender</label>
+                        </div>
+                        <div class="row clear mar-top-10">
+                            <label for="email">邮  箱：</label>
+                            <label>$!user.email</label>
+                        </div>
+                        <div class="row clear mar-top-10">
+                            <label for="email">电话：</label>
+                            <label>$!user.phone</label>
+                        </div>
+                    </div>
+                </div>
+			</form>
+        </div>
+    </div>
+<!--修改密码-->
+<div class="modal index-12" id="password-edit">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="left weight-bold blue-font">修改密码</h3>
+                <a href="javascript:void(0)" class="icon-delete right" data-dismiss="modal" aria-label="Close"></a>
+            </div>
+			<form id="passwordEditForm">
+                <div class="modal-body min-height">
+                    <div class="the-information-input the-information-list">
+                     <input type="hidden" value="$!user.userId" name="userId">
+                        <div class="row clear mar-top-10">
+                            <label for="login-name" class="red-star">旧密码：</label>
+                            <input type="password" id="password" name="password" class=" reset-input">
+                        </div>
+                        <div class="row clear mar-top-10 relative">
+                            <label for="init-password" class="red-star">新密码：</label>
+                            <input type="password" name="newPassword" id＝"newPassword" class=" reset-input">
+                        </div>
+                        <div class="row clear mar-top-10">
+                            <label for="job-number" class="red-star">确认密码：</label>
+                            <input type="password" id="comfirmPassword" name="comfirmPassword" class=" reset-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer  clear">
+                    <div class="btn-group">
+                        <a href="javascript:void(0)" class="btn-save" onclick="passwordUpdate()">保存</a>
+                        <a href="javascript:void(0)" class="btn-cancel">取消</a>
+                    </div>
+                </div>
+			</form>
+        </div>
+    </div>
+#parse('common/path-js.vm')
+<script>
+	function passwordUpdate(){
+		var result = formValidation($("#passwordEditForm"));
+		if(!result){
+			return false;
+		}
+		jQuery.ajax({
+	  		async: false,
+       		type: "post",
+       		url: "$path/permissions/passwordUpdate",
+       		data: $('#passwordEditForm').serialize(),
+		    dataType: "json",
+		    error: function (request) {
+                Alert(0,"网络错误");
+		    },
+		    success: function (data) {
+				for(x in data){
+					initAlert(x,data[x]);
+					if(x == 1){
+						setTimeout(function(){
+							location.href="$path/logout";
+						},2000)
+					}
+       			}
+		   	}
+		});
+	}
+
+	function detail(){
+		$("#people-edit").show();
+	}
+	function editPassword(){
+		$("#password-edit").show();
+	}
+	
+	//关闭大图
+    $(document).on("click","#bigImg .icon-delete,#showOriginal .icon-delete",function(){
+    	$(this).closest("div").remove();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+html {
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+}
+body{
+	overflow:auto;
+}
+.wrapper {
+    width: 100%;
+}
+
+.index-wrapper{
+    background-color: #e9edf0;
+}
+
+.index-wrapper .panel{
+    background-color: #fff;
+    height:252px;
+    overflow:hidden;
+}
+
+ul {
+    list-style: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+    -moz-margin-start: 0;
+    -moz-margin-end: 0;
+    -moz-padding-start: 0;
+}
+
+.table,.ui-jqgrid-htable {
+    border-collapse: collapse;
+    width: 100%;
+    color: #666;
+}
+
+.table a.inform-title {
+    color: #666;
+}
+
+.table th,.table  td,.ui-jqgrid-htable th{
+	text-indent:10px;
+    text-align: left;
+}
+
+.table thead tr.black {
+    color: #000;
+}
+
+.table tbody tr.bold {
+    font-weight: bold;
+    color: #000;
+}
+
+.table tbody tr.bold a.inform-title {
+    color: #000;
+}
+
+.table thead tr,.ui-jqgrid-htable thead tr{
+    height: 36px;
+    background-color: #f7f7f7;
+    color: #878787;
+}
+
+.table tbody tr {
+    height: 36px;
+    border-top:1px solid #fff;
+}
+
+.ui-jqgrid{
+	overflow:hidden;
+}
+.separate {
+    color: #CCC;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #398ef8;
+}
+
+a:hover, a:focus, a:active {
+    color: #398ef8;
+}
+
+.icon {
+    display: inline-block;
+    font-size: 10px;
+    font-style: normal;
+}
+
+.table-footer,.paginationjs{
+    background-color: #f7f7f7;
+    overflow: auto;
+    height: 40px;
+    line-height: 40px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #eee;
+    padding-left: 10px;
+}
+
+.list-pagination,.paginationjs-pages ul{
+    list-style: none;
+    overflow: hidden;
+    float: right;
+    border: 1px solid #eee;
+    -webkit-padding-start: 0;
+    margin-right: 5px;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    margin-top: 7px;
+}
+
+.list-pagination li,.paginationjs-pages li {
+    float: left;
+}
+
+.list-pagination a,.paginationjs-pages li a{
+    display: block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-right: 1px solid #eee;
+    color: #808080;
+}
+
+.list-pagination a.active,.paginationjs-pages li.active a{
+    color: #FFF;
+    background-color: #1a87ec;
+}
+
+.list-pagination li:last-child a {
+    border: 0;
+}
+
+/* button */
+
+
+.panel-table .panel-head a {
+    height: 0;
+    margin-right: 5px;
+}
+
+.panel-table {
+    margin-bottom: 10px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.panel-table:last-child {
+    margin-bottom: 0;
+}
+
+.panel-table .panel-body {
+    overflow: auto;
+}
+
+.panel-table .list-num {
+    position: relative;
+    width: 10%;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #999;
+    height: 216px;
+    line-height: 216px;
+}
+
+.panel-table .list-num span {
+    position: absolute;
+    line-height: normal;
+    font-size: 12px;
+    top: 15px;
+    left: 10px;
+    color: #808080;
+}
+
+.panel-table .list-num b {
+    font-size: 24px;
+    padding-right: 5px;
+    color: #000;
+}
+
+.panel-table table {
+    width: 90%;
+    float: left;
+}
+
+.operation {
+    padding: 10px;
+}
+
+.select-tab {
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #3a90f7;
+    color: #3a90f7;
+    border-radius: 0;
+    outline: none;
+}
+
+.clear {
+    clear: both;
+}
+.form-inline>*{
+	float:left;
+}
+.form-inline label {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+}
+
+.form-inline input[type='text'] {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #CCC;
+    outline: 0;
+    width: 120px;
+    height: 30px;
+    padding: 0;
+    text-indent: 0.5em;
+}
+.form-inline .selectTree{
+	width:120px;
+	height:30px;
+	border:1px solid #ccc;
+}
+.form-inline select {
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #CCC;
+    border-radius: 0;
+    outline: none;
+}
+
+.form-inline textarea {
+    resize: none;
+    border: 1px solid #CCC;
+    outline: none;
+    padding: 5px 0;
+    text-indent: 0.5em;
+    width:400px;
+}
+
+/* 时间起止中的"至" */
+.form-inline > span {
+    float: left;
+    padding: 0 5px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.form-inline .date-picker {
+    float: left;
+}
+
+.control-condition {
+    padding: 5px;
+    /*overflow: auto;*/
+}
+
+.control-condition > .form-inline {
+    padding: 5px 0;
+    float: left;
+}
+
+.padding-5 {
+    padding: 5px;
+    overflow: auto;
+}
+
+.info {
+    padding: 20px;
+    line-height: 40px;
+    border-top: 1px solid #eee;
+    overflow:hidden;
+    clear:both;
+    display:none;
+}
+.info li{
+	float:left;
+	margin-right:10px;	
+}
+.info li *{
+	float:left;	
+}
+.info li span{
+    margin-right: 3px;
+    font-size: 14px;
+}
+
+.info li b{
+    color: #398ef8;
+    margin-right: 25px;
+    font-size: 14px;
+    margin-left:5px;
+}
+.info li #dept{
+	color:#333;
+	margin-right:0;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    margin: 2px 0;
+    padding: 4px;
+    width: 20em;
+    /*color: #666;*/
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.bootstrap-datetimepicker-widget .list-unstyled {
+    margin: 0;
+}
+
+.collapse.in {
+    display: block;
+}
+
+.collapse {
+    display: none;
+}
+
+.bootstrap-datetimepicker-widget .picker-switch {
+    text-align: center;
+}
+
+.bootstrap-datetimepicker-widget table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.bootstrap-datetimepicker-widget table thead {
+    background-color: #d3e5f9;
+}
+
+.bootstrap-datetimepicker-widget table thead tr:first-child th {
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.bootstrap-datetimepicker-widget table thead th span.icon {
+    width: 100%;
+    padding: 0;
+}
+
+.bootstrap-datetimepicker-widget .datepicker-days thead tr:last-child th {
+    padding-bottom: 5px;
+    font-weight: normal;
+}
+
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th {
+    text-align: center;
+    border-radius: 0;
+}
+
+.bootstrap-datetimepicker-widget table td.today {
+    background-color: rgba(57, 142, 248, 0.3);
+}
+
+.bootstrap-datetimepicker-widget table td.today:hover {
+    background-color: rgba(57, 142, 248, 0.3);
+}
+
+.bootstrap-datetimepicker-widget table td.today:before {
+    content: '';
+    display: inline-block;
+    border: solid transparent;
+    border-width: 0 0 7px 7px;
+    border-bottom-color: #398ef8;
+    border-top-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+}
+
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: #398ef8 !important;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.bootstrap-datetimepicker-widget .picker-switch td {
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+    line-height: inherit;
+}
+
+.bootstrap-datetimepicker-widget a[data-action] {
+    padding: 6px 0;
+}
+
+.bootstrap-datetimepicker-widget a[data-action]:hover {
+    color: #666;
+}
+
+.bootstrap-datetimepicker-widget .picker-switch td span {
+    line-height: 2.5;
+    height: 2.5em;
+    /*width: 100%;*/
+    width: 227px;
+}
+
+.bootstrap-datetimepicker-widget table td span {
+    display: inline-block;
+    margin: 2px 1.5px;
+    cursor: pointer;
+    border-radius: 0;
+    width: 31.5%;
+}
+
+.bootstrap-datetimepicker-widget .timepicker-hour,
+.bootstrap-datetimepicker-widget .timepicker-minute,
+.bootstrap-datetimepicker-widget .timepicker-second {
+    width: 54px;
+    font-weight: normal;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.bootstrap-datetimepicker-widget .timepicker-picker table .icon {
+    width: 54px;
+    color: #000;
+}
+
+/*.bootstrap-datetimepicker-widget .timepicker-picker table .icon-chevron-up,*/
+.bootstrap-datetimepicker-widget .timepicker-picker table .icon-chevron-down {
+    margin-top: -8px;
+    /*border: 1px solid blue;*/
+}
+
+.bootstrap-datetimepicker-widget table td span.active {
+    background-color: #398ef8 !important;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+/* jqgrid */
+.table tbody .jqgfirstrow{height:0;}
+.ui-jqgrid-resize{display:none;}
+.page{height:40px;overflow:hidden;clear:both;}
+	#pg_page{width:380px;float:right;}
+		#pg_page .ui-paging-info{line-height:40px;}
+		#pg_page input{margin:0 5px;}
+	#page_center .ui-icon{font-family:"icomoon";display:block;width:20px;height:20px;line-height:20px;color:#808080;}
+	.ui-icon-seek-prev,.ui-icon-seek-next{font-size:16px;}
+	.ui-icon-seek-first,.ui-icon-seek-end{font-size:10px;}
+	.ui-icon-seek-prev:before{content:"\ea23";}
+	.ui-icon-seek-next:before{content: "\ea24";}
+	.ui-icon-seek-first:before{content:"\ea21";}
+	.ui-icon-seek-end:before{content: "\ea22";}
+.loading.ui-state-active{width:0;height:0;overflow:hidden;}
+
+.page-left{float:left;margin-top:8px;}
+	.page-left *{float:left;}
+	.page-left input{margin-left:10px;margin-top:6px;}
+	.page-left a{padding:5px 12px;border: 1px solid #CCC;color: #989898;margin-left: 10px;}
+/* 权限配置 */
+.permission{margin:10px;}
+	.thead{padding:0 10px;height:40px;line-height:40px;background:#e5e5e5;border-top:5px solid #5581d6;}
+		.thead span{float:left;width:30%;color:#888;font-weight:bold;}
+	.tbody{padding:0 10px;}
+		.tbody .list{border-bottom:1px solid #eee;}
+		.tbody .list label{float:left;height:36px;line-height:36px;color:#888;}
+		.tbody .list>label{width:100%;}
+			.tbody label input{float:left;margin-top:12px;margin-right:5px;}
+			.tbody label label{line-height:36px;}
+		.tbody .list>ul{float:left;width:60%;margin-left:30%;}
+			.tbody .list li{width:100%;}
+			.tbody .list ul li *{float:left;}
+			.tbody .list li ul{width:100%;}
+				.tbody .list li ul input{margin-left:20px;}
+				.tbody .list li>label,.tbody .list li>span{width:50%;}
+				.tbody .list li span{line-height:36px;color:#888;}
+/* 弹框按钮  */
+.btn-group {
+  float: right;
+  padding: 5px 0;
+}
+.btn-group [class^="btn-"]{
+    float: left;
+    width:80px;
+    line-height:30px;
+    border-radius:3px;
+    text-align: center;
+  }
+.btn-group .btn-save{
+    background: #5581d6;
+    border:1px solid #5581d6;
+    color: #fff;
+  }
+.btn-group .btn-cancel{
+    border:1px solid #dcdcdc;
+  }
